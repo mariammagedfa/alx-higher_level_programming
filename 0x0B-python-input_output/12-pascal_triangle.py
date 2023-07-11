@@ -1,24 +1,34 @@
 #!/usr/bin/python3
+"""A function that generate Pascal's Triangle up to a given number of rows
 """
-    12-pascal_triangle: pascal_triangle()
-"""
+
+
 
 
 def pascal_triangle(n):
     """
-        returns a lis of lists of integers
-        Args:
-            n (int): number of lists and digits
-        Returns: list of lists
+    # Technical interview preparation:
+    # Create a function def pascal_triangle(n): that returns a list of lists
+    # ..of integers representing the Pascal’s triangle of n:
+    # VARIABLE(" "):
+    # Pascal Triangle(n):  Pascal's Triangle
+    # Return: Always 0. (Success)
     """
-    t_row = [1]
-    temp_l = [0]
-    pTri = []
-
+    """
+    The function 'pascal_triangle' takes an integer 'n' as input, which
+    represents the number of rows to generate in Pascal's Triangle.
+    """
     if n <= 0:
-        return pTri
-
-    for i in range(n):
-        pTri.append(t_row)
-        t_row = [l+r for l, r in zip(t_row + temp_l, temp_l + t_row)]
-    return pTri
+        return []
+    trigon = [[] for x in range(n)]
+    trigon[0] = [1]
+    if n > 1:
+        trigon[1] = [1, 1]
+    if n > 2:
+        for i in range(2, n):
+            trigon[i].append(1)
+            for j in range(i - 1):
+                trigon[i].append(trigon[i - 1][j] + trigon[i - 1][j + 1])
+            trigon[i].append(1)
+    return trigon
+    """Finally, we return the generated 'triangle'"""
